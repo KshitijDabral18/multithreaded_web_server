@@ -2,6 +2,8 @@ package org.example.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.entities.User;
+import org.example.util.UserServiceUtil;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -23,6 +25,12 @@ public class UserBookingService {
         userList = objectMapper.readValue(users, new TypeReference<List<User>>(){});
     }
     public Boolean loginUser(){
-        Optional<User> founduser= userList.stream().filter(user1 -> {return user1.getName().equals(user.getName())&& UserServiceUtil.checkPassword(user.getPassword(),user1.getHashedPassword());}).findFirst();   }
+        Optional<User> foundUser= userList.stream().filter(user1 -> {
+            return user1.getName().equals(user.getName())&& UserServiceUtil.checkPassword(user.getPassword(),user1.getHashedPassword());
+        }).findFirst();
+        
+        return foundUser.isPresent();
+    }
+    
 
 }
