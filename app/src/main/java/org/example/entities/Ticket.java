@@ -1,31 +1,31 @@
 package org.example.entities;
 import java.util.Date;
 public class Ticket {
-    private String ticketID;
-    private String userID;
+    private String ticketId;
+    private String userId;
     private String source;
     private String destination;
     private Date dateOfTravel;
     private Train train;
 
-    public Ticket(String ticketID, String userID, String source, String destination, Date dateOfTravel, Train train) {
-        this.ticketID = ticketID;
-        this.userID = userID;
+    public Ticket(String ticketId, String userId, String source, String destination, Date dateOfTravel, Train train) {
+        this.ticketId = ticketId;
+        this.userId = userId;
         this.source = source;
         this.destination = destination;
         this.dateOfTravel = dateOfTravel;
         this.train = train;
     }
     public String getTicketInfo(){
-        return String.format("Ticket ID: %s belongs to user %s from %s to %s on %s",ticketID,userID,source,destination,dateOfTravel);
+        return String.format("Ticket ID: %s belongs to user %s from %s to %s on %s", ticketId, userId,source,destination,dateOfTravel);
     }
 
-    public String getTicketID() {
-        return ticketID;
+    public String getTicketId() {
+        return ticketId;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getUserId() {
+        return userId;
     }
 
     public String getSource() {
@@ -44,12 +44,12 @@ public class Ticket {
         return train;
     }
 
-    public void setTicketID(String ticketID) {
-        this.ticketID = ticketID;
+    public void setTicketId(String ticketId) {
+        this.ticketId = ticketId;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public void setDestination(String destination) {

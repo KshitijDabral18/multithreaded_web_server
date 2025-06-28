@@ -4,14 +4,14 @@ public class User {
     private String name;
     private String password;
     private String hashedPassword;
-    private List<Ticket> ticketBooked;
+    private List<Ticket> ticketsBooked;
     private String userId;
 
-    public User(String name,String password, String hashedPassword,List<Ticket> ticketBooked,String userId) {
+    public User(String name,String password, String hashedPassword,List<Ticket> ticketsBooked,String userId) {
         this.name=name;
         this.password=password;
         this.hashedPassword=hashedPassword;
-        this.ticketBooked= ticketBooked;
+        this.ticketsBooked= ticketsBooked;
         this.userId=userId;
     }
     public User(){}
@@ -28,12 +28,12 @@ public class User {
     public String getUserId(){
         return userId;
     }
-    public List<Ticket> getTicketBooked(){
-        return ticketBooked;
+    public List<Ticket> getTicketsBooked(){
+        return ticketsBooked;
     }
     public void printTickets(){
-        for(int i =0; i<ticketBooked.size();i++){
-            System.out.println(ticketBooked.get(i).getTicketInfo());
+        for(int i =0; i<ticketsBooked.size();i++){
+            System.out.println(ticketsBooked.get(i).getTicketInfo());
         }
     }
 
@@ -49,8 +49,8 @@ public class User {
     public void setHashedPassword(){
         this.hashedPassword=hashedPassword;
     }
-    public void setTicketBooked(){
-        this.ticketBooked=ticketBooked;
+    public void setTicketsBooked(){
+        this.ticketsBooked=ticketsBooked;
     }
 
 
