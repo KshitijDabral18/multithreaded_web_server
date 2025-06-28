@@ -19,14 +19,11 @@ public class UserBookingService {
     private static final String USER_FILE_PATH="app/src/main/java/org/example/localDb/users.json";
     private ObjectMapper objectMapper=new ObjectMapper();
     public UserBookingService(User user1) throws IOException {
-
-
-        
         this.user=user1;
-
         File users=new File(USER_FILE_PATH);
         userList = objectMapper.readValue(users, new TypeReference<List<User>>(){});
     }
+    // this function is used for existing users only
     public Boolean loginUser(){
         Optional<User> foundUser= userList.stream().filter(user1 -> {
             return user1.getName().equals(user.getName())&& UserServiceUtil.checkPassword(user.getPassword(),user1.getHashedPassword());
@@ -35,6 +32,7 @@ public class UserBookingService {
         return foundUser.isPresent();
     }
 
+    //for new users registration
     public Boolean signUp(User user1){
         try{userList.add(user1);
             saveUserListToFile();
@@ -45,13 +43,17 @@ public class UserBookingService {
             return Boolean.FALSE;
         }
     }
+    //this function saves new user to local db as json file
     public void saveUserListToFile() throws IOException {
         File usersFile = new File(USER_FILE_PATH);
         objectMapper.writeValue(usersFile, userList);
     }
     
-    public void fetchBooking(){
+    public void fetchBookings()
+    {
+        Optional <User> userFetched=userList.stream().filter(user1 -> {return user1.getName().equals(user.getName())&&UserServiceUtil.checkPassword(user.getPassword(),user1.getHashedPassword());}).findFirst();
         user.printTickets();
+
     }
     public Boolean canceltickets(String ticketId){
         Scanner sc =new Scanner(System.in);
