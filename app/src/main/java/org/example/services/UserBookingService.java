@@ -52,8 +52,10 @@ public class UserBookingService {
     public void fetchBookings()
     {
         Optional <User> userFetched=userList.stream().filter(user1 -> {return user1.getName().equals(user.getName())&&UserServiceUtil.checkPassword(user.getPassword(),user1.getHashedPassword());}).findFirst();
-        user.printTickets();
-
+        if(userFetched.isPresent())
+        {
+            userFetched.get().printTickets();
+        }
     }
     public Boolean canceltickets(String ticketId){
         Scanner sc =new Scanner(System.in);
