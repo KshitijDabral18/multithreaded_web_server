@@ -18,10 +18,17 @@ public class UserBookingService {
     private List<User> userList;
     private static final String USER_FILE_PATH="app/src/main/java/org/example/localDb/users.json";
     private ObjectMapper objectMapper=new ObjectMapper();
-    public UserBookingService(User user1) throws IOException {
-        this.user=user1;
-        File users=new File(USER_FILE_PATH);
-        userList = objectMapper.readValue(users, new TypeReference<List<User>>(){});
+    public UserBookingService(User user) throws IOException {
+        this.user = user;
+        loadUserListFromFile();
+    }
+
+    public UserBookingService() throws IOException {
+        loadUserListFromFile();
+    }
+
+    private void loadUserListFromFile() throws IOException {
+        userList = objectMapper.readValue(new File(USER_FILE_PATH), new TypeReference<List<User>>() {});
     }
     // this function is used for existing users only
     public Boolean loginUser(){
