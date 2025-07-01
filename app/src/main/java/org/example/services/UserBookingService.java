@@ -2,12 +2,14 @@ package org.example.services;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.entities.Ticket;
+import org.example.entities.Train;
 import org.example.entities.User;
 import org.example.util.UserServiceUtil;
 
 import java.io.File;
 import java.io.IOException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -85,5 +87,16 @@ public class UserBookingService {
         }else{
             System.out.println("No ticket Found with TicketID "+ finalTicketId+" .");
         return Boolean.FALSE;}
+    }
+    public List<Train> getTrains(String source, String dest) {
+        try{TrainService trainService = new TrainService();
+            return trainService.searchTrains(source, dest);
+        } catch (IOException e) {
+            return new ArrayList<>(); // Return an empty list in case of error
+        }
+        // This method should return a list of trains based on the source and destination.
+        // For now, we will return an empty list as a placeholder.
+        // In a real application, this would involve querying a database or an API.
+        // Placeholder for actual train fetching logic
     }
 }

@@ -3,6 +3,7 @@
  */
 package org.example;
 
+import org.example.entities.Train;
 import org.example.entities.User;
 import org.example.services.UserBookingService;
 import org.example.util.UserServiceUtil;
@@ -68,8 +69,18 @@ public class App {
                     break;
 
 
-                case 4:System.out.println("Booking a seat is not implemented yet");
-                    System
+
+                case 4:System.out.println("ENTER SOURCE:");
+                    String source = sc.nextLine();
+                    System.out.println("ENTER DESTINATION");
+                    String dest = sc.nextLine();
+                    //System.out.println("ENTER DATE OF TRAVEL (YYYY-MM-DD)");
+                    //String dateOfTravel = sc.nextLine();
+                    List<Train> trains = userBookingService.getTrains(Source,dest); // This should be replaced with actual train fetching logic
+
+
+                    System.out.println("Booking ticket from " + source + " to " + dest + " on " + dateOfTravel);
+
                     break;
                     
                 case 5:
