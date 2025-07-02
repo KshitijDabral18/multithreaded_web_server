@@ -89,9 +89,11 @@ public class UserBookingService {
         return Boolean.FALSE;}
     }
     public List<Train> getTrains(String source, String dest) {
-        try{TrainService trainService = new TrainService();
+        try{
+            TrainService trainService = new TrainService();
             return trainService.searchTrains(source, dest);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             return new ArrayList<>(); // Return an empty list in case of error
         }
         // This method should return a list of trains based on the source and destination.
