@@ -94,11 +94,7 @@ public class UserBookingService {
             return trainService.searchTrains(source, dest);
         }
         catch (IOException e) {
-            return new ArrayList<>(); // Return an empty list in case of error
+            return new ArrayList<>();
         }
-        // This method should return a list of trains based on the source and destination.
-        // For now, we will return an empty list as a placeholder.
-        // In a real application, this would involve querying a database or an API.
-        // Placeholder for actual train fetching logic
     }
 }

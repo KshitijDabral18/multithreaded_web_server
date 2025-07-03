@@ -76,10 +76,13 @@ public class App {
                     String dest = sc.nextLine();
                     //System.out.println("ENTER DATE OF TRAVEL (YYYY-MM-DD)");
                     //String dateOfTravel = sc.nextLine();
-                    List<Train> trains = userBookingService.getTrains(Source,dest); // This should be replaced with actual train fetching logic
+                    List<Train> trains = userBookingService.getTrains(source,dest); // This should be replaced with actual train fetching logic
 
-
-                    System.out.println("Booking ticket from " + source + " to " + dest + " on " + dateOfTravel);
+                    int index =1;
+                    for(Train t: trains){
+                        System.out.println(index+"Train ID"+ t.getTrainId());
+                    }
+                    
 
                     break;
                     
