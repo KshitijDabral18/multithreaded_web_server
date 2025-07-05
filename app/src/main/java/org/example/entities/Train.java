@@ -17,6 +17,9 @@ public class Train {
         this.stationTime = stationTime;
         Station = station;
     }
+    public Train() {
+        // Default constructor
+    }
 
     public String getTrainId() {
         return trainId;

@@ -10,14 +10,14 @@ import org.example.util.UserServiceUtil;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
+import java.util.List;
 
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
+
 
     public static void main(String[] args) {
 
@@ -40,7 +40,7 @@ public class App {
             System.out.println("Enter 6 -> CANCEL MY TICKET");
             System.out.println("Enter 5 -> BOOK YOUR SEAT");
             System.out.println("Enter 7 -> EXIT THE APP");
-
+            Train trainSelectedForBooking = new Train();
             option=sc.nextInt();
             switch(option){
                 case 1:System.out.println("Enter USERNAME to SIGNUP");
@@ -67,27 +67,59 @@ public class App {
                     System.out.println("fetching Your Bookings");
                     userBookingService.fetchBookings();
                     break;
-
-
-
                 case 4:System.out.println("ENTER SOURCE:");
                     String source = sc.nextLine();
                     System.out.println("ENTER DESTINATION");
                     String dest = sc.nextLine();
-                    //System.out.println("ENTER DATE OF TRAVEL (YYYY-MM-DD)");
-                    //String dateOfTravel = sc.nextLine();
+                    System.out.println("ENTER DATE OF TRAVEL (YYYY-MM-DD)");
+                    String dateOfTravel = sc.nextLine();
                     List<Train> trains = userBookingService.getTrains(source,dest); // This should be replaced with actual train fetching logic
 
                     int index =1;
                     for(Train t: trains){
                         System.out.println(index+"Train ID"+ t.getTrainId());
+                        for(Map.Entry<String, String> entry: t.getStationTime().entrySet()) {
+                            System.out.println("station "+entry.getKey()+" time: "+entry.getValue());
+                        }
                     }
-                    
-
+                    System.out.println("Select a train by typing 1,2,3...");
+                    trainSelectedForBooking = trains.get(sc.nextInt());
                     break;
                     
                 case 5:
+                    System.out.println("Select a seat out of these seats");
+                    List<List<Integer>> seats = userBookingService.fetchSeats(trainSelectedForBooking);
+                    for (List<Integer> row: seats){
+                        for (Integer val: row){
+                            System.out.print(val+" ");
+                        }
+                        System.out.println();
+                    }
+                    System.out.println("Select the seat by typing the row and column");
+                    System.out.println("Enter the row");
+                    int row = sc.nextInt();
+                    System.out.println("Enter the column");
+                    int col = sc.nextInt();
+                    System.out.println("Booking your seat....");
+                    Boolean booked = userBookingService.bookTrainSeat(trainSelectedForBooking, row, col);
+                    if(booked.equals(Boolean.TRUE)){
+                        System.out.println("Booked! Enjoy your journey");
+                    }else{
+                        System.out.println("Can't book this seat");
+                    }
+                    break;
+
                 case 6:
+                    System.out.println("enter your train id to cancel the ticket");
+                    String trainIdToCancel = sc.nextLine();
+                    boolean isCancelled = userBookingService.canceltickets(trainIdToCancel);
+                    if(isCancelled) {
+                        System.out.println("Ticket cancelled successfully.");
+                    } else {
+                        System.out.println("Ticket cancellation failed.");
+                    }
+                    break;
+
                 case 7: System.exit(0);
             }
         }
